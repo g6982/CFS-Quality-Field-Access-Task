@@ -22,7 +22,8 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='name']" position="after">
                 <field name="check_buyer"/> 
-                <field name="check_quality"/>
+                <!-- ERPQ4-316: Create a field that identifies whicha access groups are allowed access to Quality Clauses Field -->
+                <field name="cap_check_quality"/>
             </xpath>
         </field>
     </record>

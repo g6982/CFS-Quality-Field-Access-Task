@@ -12,5 +12,8 @@ class AccessManagement(models.Model):
     check_buyer = fields.Boolean(string="Check Buyer", help="Enabling this will consider all users in this studio role as Buyers", default=False)
 
     # ERPQ4-316: Create a field that identifies whicha access groups are allowed access to Quality Clauses Field
-    check_quality = feilds.Boolean(string="Check Quality", help="Enabling this will grant all users in this studio role access to quality specific fields", default=False)
+    # check_quality = feilds.Boolean(string="Check Quality", help="Enabling this will grant all users in this studio role access to quality specific fields", default=False)
+    cap_check_quality = fields.Boolean(string='Check Quality Access', 
+                                        help="Enabling this will grant all users in this studio role access to quality specific fields", 
+                                        default=False)
 
