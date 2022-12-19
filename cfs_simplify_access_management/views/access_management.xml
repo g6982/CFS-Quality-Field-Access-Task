@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- EOI 806 -->
+        <record id="access_management_form_view_ah_inherit" model="ir.ui.view">
+            <field name="name">access.management.form.view.ah.inherit</field>
+            <field name="model">access.management</field>
+            <field name="inherit_id" ref="simplify_access_management.access_management_form_view_ah"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='readonly']" position="before">
+                    <field name="is_ap_or_tameka"></field>
+                </xpath>
+            </field>
+        </record>
+    </data>
+
+    <!-- EOI-689: Create a field identifies which access group are buyers -->
+    <record id="access_management_form_view_ah_inherit" model="ir.ui.view">
+        <field name="name">access.management.form.view.ah.inherit</field>
+        <field name="model">access.management</field>
+        <field name="inherit_id" ref="simplify_access_management.access_management_form_view_ah"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="check_buyer"/> 
+                <field name="check_quality"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

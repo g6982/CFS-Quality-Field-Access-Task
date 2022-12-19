@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="commodity_code_segment_list_view" model="ir.ui.view">
+            <field name="name">commodity.code.segment.list</field>
+            <field name="model">commodity.code.segment</field>
+            <field name="priority">10</field>
+            <field name="arch" type="xml">
+                <tree string="Commodity Segment Codes">
+                    <field name="commodity_segment_type"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- <record id="commodity_code_segment_form_view" model="ir.ui.view">
+            <field name="name">commodity.code.segment.form</field>
+            <field name="model">commodity.code.segment</field>
+            <field name="arch" type="xml">
+                <form string="Comodity Segment Form">
+                    <sheet>
+                        <div>
+                            <h1>
+                                <field name="name"></field>
+                            </h1>
+                        </div>
+                        <group>
+                            <group name="segmentcolumn1">
+                                <field name="commodity_segment_code"/>
+                            </group>
+                            <group name="segmentcolumn2">
+                                <field name="commodity_segment_parent"/>
+                                <field name="commodity_segment_type"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>    -->
+        
+        <record id="commodity_code_segment_action" model="ir.actions.act_window">
+            <field name="name">Create Segment</field>
+            <field name="res_model">commodity.code.segment</field>
+            <field name="view_id" ref="commodity_code_segment_list_view"></field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No segments?
+                </p>
+            </field>
+        </record>
+
+        <menuitem
+        id="menu_commodity_code_segment"
+        parent="menu_commodity_code_root"
+        name="Commodity Segments"
+        sequence="3"
+        action="commodity_code_segment_action"/>
+    </data>
+</odoo>

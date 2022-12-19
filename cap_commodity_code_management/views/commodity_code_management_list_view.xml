@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="commodity_code_management_list_view" model="ir.ui.view">
+            <field name="name">commodity.code.management.list</field>
+            <field name="model">commodity.code.management</field>
+            <!-- <field name="priority">10</field> -->
+            <field name="arch" type="xml">
+                <tree string="Commodity Codes">
+                    <field name="name"/>
+                    <field name="buyer"/>
+                    <!-- widget="many2one_avatar_user" -->
+                    <field name="write_date"/>
+                    <field name="user_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="commodity_code_management_view_form" model="ir.ui.view">
+            <field name="name">commodity.code.management.form</field>
+            <field name="model">commodity.code.management</field>
+            <field name="arch" type="xml">
+                <form string="Commodity Code Form">
+                    <sheet>
+                        <h1>
+                            <field name="name"></field>
+                        </h1>
+                        <group>
+                            <group name="column1">
+                                <field name="commodity_parent" options="{'no_create': True, 'no_create_edit':True}" domain="[('commodity_segment_type', '=', 'parent')]"/>
+                                <field name="commodity_sub" options="{'no_create': True, 'no_create_edit':True}" domain="[('commodity_segment_type', '!=', 'parent')]"/>
+                                <field name="commodity_low" options="{'no_create': True, 'no_create_edit':True}" domain="[('commodity_segment_type', '!=', 'parent')]"/>
+                            </group>
+                            <group name="column2">
+                                <field name="buyer"/>
+                                <field name="notes"/>
+                                <field name="description"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="commodity_code_management_view_search" model="ir.ui.view">
+            <field name="name">commodity.code.management.search</field>
+            <field name="model">commodity.code.management</field>
+            <field name="arch" type="xml">
+                <search>
+                        <group expand="0" string="Group By">
+                            <filter string="Commodity Parent" name="groupby_commodity_parent" domain="[]" context="{'group_by': 'commodity_parent'}"/>
+                            <filter string="Buyer" name="groupby_buyer" domain="[]" context="{'group_by': 'buyer'}"/>
+                        </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Use this to make a filter default -->
+        <!-- <record model="ir.actions.act_window" id="stock_production_type_kanban_action">
+            <field name="name">Default Filter Groupby</field>
+            <field name="res_model">commodity.code.management</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{'search_default_groupby_insertfieldhere':1}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Place Holder</p>
+            </field>
+        </record> -->
+
+        <record id="commodity_code_management_action" model="ir.actions.act_window">
+            <field name="name">All Codes</field>
+            <field name="res_model">commodity.code.management</field>
+            <field name="view_id" ref="commodity_code_management_list_view"></field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Approvals
+                </p>
+            </field>
+        </record>
+
+        <menuitem
+        id="menu_commodity_code_root"
+        name="Commodity Management"
+        sequence="1"
+        action="commodity_code_management_action"/>
+
+        <menuitem
+        id="menu_commodity_code"
+        parent="menu_commodity_code_root"
+        name="Commodity Codes"
+        sequence="2"/>
+    </data>
+</odoo>

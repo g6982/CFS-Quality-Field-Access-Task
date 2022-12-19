@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EOI 784 adding purchase_account to the view -->
+    <odoo>
+        <data>
+            <record id="account_account_inherit_form" model="ir.ui.view">
+                <field name="name">account.account.form.add.fields</field>
+                <field name="model">account.account</field>
+                <field name="inherit_id" ref="account.view_account_form"/>
+                <field name="arch" type="xml">
+                    <!-- EOI 784 Adding purchase account field -->
+                    <xpath expr="//field[@name='user_type_id']" position="after">
+                        <field name="purchase_account"/>
+                    </xpath>
+                </field>
+            </record>
+        </data> 
+    </odoo>
+    
