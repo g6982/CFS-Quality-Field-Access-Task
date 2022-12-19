@@ -156,7 +156,9 @@
                 <group name="purchase" position="before">
                     <group>
                         <!-- ERPQ4-37: Removed No Create and No Edit and Changed String to Quality Clauses -->
-                        <field name="quality_codes" string="Quality Clauses" widget="many2many_tags"/>
+                        <!-- ERPQ4-316: Added Readonly attrs to field, and added new computed field to view -->
+                        <field name="quality_codes" string="Quality Clauses" widget="many2many_tags" attrs="{'readonly': [('is_quality_user', '=', False)]}"/>
+                        <field name="is_quality_user" string="Quality User" invisible="1"/>
                     </group>
                 </group>
 

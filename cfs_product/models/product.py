@@ -107,6 +107,13 @@ class ProductTemplate(models.Model):
         comodel_name="product.quality.code", string="Quality Codes"
     )
 
+    # ERPQ4-316 Check User to adjust Readonly Attribute on quality_codes field
+    is_quality_user = fields.Boolean(
+        compute='_check_quality_access',
+        string='Is Quality User',
+        default=False
+    )
+
     # ERPQ4-34: Creating Quality Level Selection
     quality_level = fields.Selection(
         [
@@ -263,6 +270,16 @@ class ProductTemplate(models.Model):
                     }
                     self.env["product.supplierinfo"].create(vals)
 
+    # ERPQ4-316 Function Sets computed field which is used to Toggle Readonly Attribute through the view
+    @api.depends('is_quality_user')
+    def _check_quality_access(self):
+        quality_groups = self.env['access.management'].search([('cap_check_quality','=',True)])
+        if self.env.user in quality_groups.user_ids:
+            self.is_quality_user = True
+        else:
+            self.is_quality_user = False
+
+    
 
 class ProductCategory(models.Model):
 
